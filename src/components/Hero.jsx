@@ -24,7 +24,7 @@ export default function Hero() {
           duration: 1.2,
           ease: 'power3.out',
           stagger: 0.15,
-          delay: 1.4, // Sync after curtain reveal
+          delay: 0.2,
         })
       }
 
@@ -37,7 +37,7 @@ export default function Hero() {
           duration: 0.8,
           ease: 'power2.out',
           stagger: 0.1,
-          delay: 1.8,
+          delay: 0.4,
         })
       }
 

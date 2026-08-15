@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { initSmoothScroll } from './utils/smoothScroll'
 import BackgroundEffects from './components/BackgroundEffects'
 import CustomCursor from './components/CustomCursor'
-import CurtainIntro from './components/CurtainIntro'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
@@ -39,9 +38,6 @@ export default function App() {
 
       {/* Desktop Custom Cursor */}
       <CustomCursor />
-
-      {/* Split Curtain Intro */}
-      <CurtainIntro />
 
       {/* Main Header / Navigation */}
       <Navbar />
