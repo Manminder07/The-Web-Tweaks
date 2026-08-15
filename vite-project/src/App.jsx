@@ -21,6 +21,11 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null)
 
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+    window.scrollTo(0, 0)
+
     const lenis = initSmoothScroll()
     return () => {
       if (lenis) lenis.destroy()

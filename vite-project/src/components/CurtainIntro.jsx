@@ -15,8 +15,12 @@ export default function CurtainIntro() {
       return
     }
 
+    document.body.style.overflow = 'hidden'
+    window.scrollTo(0, 0)
+
     const tl = gsap.timeline({
       onComplete: () => {
+        document.body.style.overflow = ''
         setComplete(true)
       },
     })
@@ -37,6 +41,9 @@ export default function CurtainIntro() {
       stagger: 0,
     }, '-=0.2')
 
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [])
 
   if (complete) return null

@@ -5,6 +5,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 export function initSmoothScroll() {
+  // Disable automatic browser scroll restoration so reloads reset to top
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual'
+  }
+  window.scrollTo(0, 0)
+
   // Check if reduced motion is requested
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   if (prefersReducedMotion) {
@@ -17,6 +23,9 @@ export function initSmoothScroll() {
     smoothWheel: true,
     touchMultiplier: 1.5,
   })
+
+  // Force Lenis to position 0 immediately
+  lenis.scrollTo(0, { immediate: true })
 
   // Update ScrollTrigger on Lenis scroll
   lenis.on('scroll', ScrollTrigger.update)
