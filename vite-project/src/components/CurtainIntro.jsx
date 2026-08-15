@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export default function CurtainIntro() {
   const containerRef = useRef(null)
@@ -9,6 +10,9 @@ export default function CurtainIntro() {
   const [complete, setComplete] = useState(false)
 
   useEffect(() => {
+    // Reset scroll to top instantly
+    window.scrollTo(0, 0)
+
     // Respect reduced motion or session flag
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setComplete(true)
@@ -16,12 +20,12 @@ export default function CurtainIntro() {
     }
 
     document.body.style.overflow = 'hidden'
-    window.scrollTo(0, 0)
 
     const tl = gsap.timeline({
       onComplete: () => {
         document.body.style.overflow = ''
         setComplete(true)
+        ScrollTrigger.refresh()
       },
     })
 

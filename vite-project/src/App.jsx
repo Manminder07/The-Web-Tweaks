@@ -26,9 +26,9 @@ export default function App() {
     }
     window.scrollTo(0, 0)
 
-    const lenis = initSmoothScroll()
+    const scrollInstance = initSmoothScroll()
     return () => {
-      if (lenis) lenis.destroy()
+      if (scrollInstance && scrollInstance.destroy) scrollInstance.destroy()
     }
   }, [])
 

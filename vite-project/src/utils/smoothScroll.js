@@ -1,4 +1,5 @@
 import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -9,6 +10,12 @@ export function initSmoothScroll() {
   if ('scrollRestoration' in window.history) {
     window.history.scrollRestoration = 'manual'
   }
+
+  // Clear any URL hash on reload to prevent auto-scrolling to anchors
+  if (window.location.hash) {
+    window.history.replaceState(null, null, window.location.pathname)
+  }
+
   window.scrollTo(0, 0)
 
   // Check if reduced motion is requested
@@ -38,5 +45,12 @@ export function initSmoothScroll() {
   gsap.ticker.add(updateTicker)
   gsap.ticker.lagSmoothing(0)
 
-  return lenis
+  return {
+    lenis,
+    destroy: () => {
+      gsap.ticker.remove(updateTicker)
+      lenis.destroy()
+    },
+  }
 }
+
