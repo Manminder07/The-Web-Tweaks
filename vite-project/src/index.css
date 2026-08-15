@@ -1,0 +1,415 @@
+/* ==========================================================================
+   THE WEB TWEAKS — DESIGN SYSTEM & GLOBAL STYLES
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg: #0B0A08;
+  --bg2: #161310;
+  --ink: #F3EEE3;
+  --dim: #948C7C;
+  --ember: #E85C1F;
+  --gold: #D9A441;
+  --line: rgba(243, 238, 227, 0.12);
+  --line-strong: rgba(243, 238, 227, 0.26);
+
+  /* Typography Stacks */
+  --font-editorial: 'Fraunces', serif;
+  --font-sans-bold: 'Space Grotesk', sans-serif;
+  --font-script: 'Caveat', cursive;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout Constants */
+  --container-max: 1280px;
+  --section-padding-y: clamp(4rem, 8vw, 8rem);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  /* Smooth Transitions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base Setup
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto; /* Handled by Lenis */
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--ink);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility & Skip-to-content
+   -------------------------------------------------------------------------- */
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--ember);
+  color: #FFF;
+  padding: 0.75rem 1.25rem;
+  z-index: 9999;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  border-radius: var(--radius-sm);
+  transition: top 0.2s ease;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+  outline: 2px solid var(--gold);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   Progressive Enhancement & Failsafe
+   --------------------------------------------------------------------------
+   ALL elements are visible and naturally placed by default in plain CSS.
+   Animations use gsap.from(), preserving default CSS state.
+   The .js-failsafe-reveal class is added via timeout to guarantee visibility.
+*/
+.hero-reveal-item,
+.split-line,
+.card-reveal,
+.section-fade {
+  opacity: 1;
+  transform: none;
+}
+
+.js-failsafe-reveal * {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* --------------------------------------------------------------------------
+   Typography Utilities
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.font-editorial {
+  font-family: var(--font-editorial);
+  font-style: italic;
+}
+
+.font-sans-bold {
+  font-family: var(--font-sans-bold);
+  font-weight: 700;
+}
+
+.font-script {
+  font-family: var(--font-script);
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1.5px var(--ink);
+  color: transparent;
+  transition: -webkit-text-stroke-color 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .text-stroke {
+    -webkit-text-stroke: 1px var(--ink);
+  }
+}
+
+.text-ember {
+  color: var(--ember);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.text-dim {
+  color: var(--dim);
+}
+
+/* --------------------------------------------------------------------------
+   Layout Containers & Utilities
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 4vw, 3rem);
+  padding-right: clamp(1.25rem, 4vw, 3rem);
+}
+
+.section {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+  position: relative;
+}
+
+.section-border-top {
+  border-top: 1px solid var(--line);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  margin-bottom: 1rem;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--ember);
+}
+
+/* --------------------------------------------------------------------------
+   Background Noise & Smoke Blobs
+   -------------------------------------------------------------------------- */
+.grain-overlay {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stroke='none' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.smoke-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.2s ease-out;
+  will-change: transform;
+}
+
+.smoke-ember {
+  width: min(500px, 60vw);
+  height: min(500px, 60vw);
+  background: radial-gradient(circle, var(--ember) 0%, rgba(232, 92, 31, 0) 70%);
+  top: 10%;
+  right: -5%;
+}
+
+.smoke-gold {
+  width: min(450px, 55vw);
+  height: min(450px, 55vw);
+  background: radial-gradient(circle, var(--gold) 0%, rgba(217, 164, 65, 0) 70%);
+  bottom: 15%;
+  left: -5%;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Cursor (Desktop Only)
+   -------------------------------------------------------------------------- */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: width 0.25s var(--ease-out-expo),
+              height 0.25s var(--ease-out-expo),
+              background-color 0.25s ease,
+              border 0.25s ease;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 10px;
+  height: 10px;
+  background-color: var(--ember);
+}
+
+.cursor-hover {
+  width: 32px;
+  height: 32px;
+  background-color: var(--gold);
+  opacity: 0.85;
+}
+
+.cursor-view {
+  width: 84px;
+  height: 84px;
+  background-color: rgba(11, 10, 8, 0.85);
+  border: 1.5px dashed var(--gold);
+  animation: cursorRotate 12s linear infinite;
+}
+
+.cursor-view-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+@keyframes cursorRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Hide custom cursor on mobile / touch / small screens */
+@media (max-width: 900px), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Cards & Interactive Elements
+   -------------------------------------------------------------------------- */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--line-strong);
+}
+
+.card-interactive {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: var(--ember);
+  color: var(--ink);
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background-color: #f0682b;
+  box-shadow: 0 0 25px rgba(232, 92, 31, 0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: transparent;
+  color: var(--ink);
+  padding: 0.875rem 1.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border: 1px solid var(--line-strong);
+  cursor: pointer;
+  transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background-color: rgba(217, 164, 65, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion Overrides
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .smoke-blob,
+  .custom-cursor,
+  .curtain-panel,
+  .cursor-view {
+    display: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Global Keyframe Animations
+   -------------------------------------------------------------------------- */
+@keyframes spinContinuous {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+

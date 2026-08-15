@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary SEO -->
+    <title>The Web Tweaks — Small tweaks. Big difference.</title>
+    <meta name="title" content="The Web Tweaks — Small tweaks. Big difference." />
+    <meta name="description" content="A digital studio for brands with texture. Small, precise web design & development tweaks that add up to a big result." />
+    <meta name="author" content="The Web Tweaks Studio" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://thewebtweaks.com/" />
+    <meta property="og:title" content="The Web Tweaks — Small tweaks. Big difference." />
+    <meta property="og:description" content="A digital studio for brands with texture. High-end web design, animation, & front-end engineering." />
+    <meta property="og:image" content="https://thewebtweaks.com/og-image.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://thewebtweaks.com/" />
+    <meta property="twitter:title" content="The Web Tweaks — Small tweaks. Big difference." />
+    <meta property="twitter:description" content="A digital studio for brands with texture. High-end web design, animation, & front-end engineering." />
+    <meta property="twitter:image" content="https://thewebtweaks.com/og-image.jpg" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%230B0A08' stroke='%23E85C1F' stroke-width='4'/><path d='M25 35 L38 68 L50 45 L62 68 L75 35' fill='none' stroke='%23D9A441' stroke-width='6' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:ital,opsz,wght@1,9..144,400..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Accessibility Skip Link -->
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <div id="app"></div>
+    
+    <!-- Failsafe script for progressive enhancement: ensures all animated elements become visible after 2.5s even if external JS fails -->
+    <script>
+      setTimeout(function() {
+        document.body.classList.add('js-failsafe-reveal');
+      }, 2500);
+    </script>
+    
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
