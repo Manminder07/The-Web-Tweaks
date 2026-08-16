@@ -17,7 +17,7 @@ export default function Footer() {
         zIndex: 2,
       }}
     >
-      <div class="container">
+      <div className="container">
         
         {/* Top Footer Row */}
         <div
@@ -119,17 +119,17 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com" target="_blank" rel="noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
                   X / Twitter
                 </a>
               </li>
               <li>
-                <a href="https://github.com" target="_blank" rel="noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
                   LinkedIn
                 </a>
               </li>

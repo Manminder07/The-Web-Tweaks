@@ -68,7 +68,7 @@ export default function CaseStudyModal({ project, onClose }) {
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', color: 'var(--gold)', marginBottom: '0.5rem' }}>
                   {project.index} • {project.year}
                 </div>
-                <h2 class="font-editorial" style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', lineHeight: 1.15, color: 'var(--ink)' }}>
+                <h2 className="font-editorial" style={{ fontSize: 'clamp(2rem, 4vw, 3.25rem)', lineHeight: 1.15, color: 'var(--ink)' }}>
                   {project.title}
                 </h2>
               </div>
@@ -132,7 +132,7 @@ export default function CaseStudyModal({ project, onClose }) {
             {/* Problem / Approach / Result Grid */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '2.5rem' }}>
               
-              <div class="card" style={{ background: 'rgba(11,10,8,0.5)', padding: '1.5rem' }}>
+              <div className="card" style={{ background: 'rgba(11,10,8,0.5)', padding: '1.5rem' }}>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--ember)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                   01 / THE PROBLEM
                 </div>
@@ -141,7 +141,7 @@ export default function CaseStudyModal({ project, onClose }) {
                 </p>
               </div>
 
-              <div class="card" style={{ background: 'rgba(11,10,8,0.5)', padding: '1.5rem' }}>
+              <div className="card" style={{ background: 'rgba(11,10,8,0.5)', padding: '1.5rem' }}>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--gold)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                   02 / THE APPROACH
                 </div>
@@ -150,7 +150,7 @@ export default function CaseStudyModal({ project, onClose }) {
                 </p>
               </div>
 
-              <div class="card" style={{ background: 'rgba(11,10,8,0.5)', padding: '1.5rem' }}>
+              <div className="card" style={{ background: 'rgba(11,10,8,0.5)', padding: '1.5rem' }}>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--ink)', textTransform: 'uppercase', marginBottom: '0.5rem' }}>
                   03 / THE RESULT
                 </div>
@@ -200,7 +200,7 @@ export default function CaseStudyModal({ project, onClose }) {
               <a
                 href="#contact"
                 onClick={onClose}
-                class="btn-primary"
+                className="btn-primary"
                 style={{ fontSize: '0.875rem', padding: '0.75rem 1.5rem' }}
               >
                 <span>Request Similar Build</span>

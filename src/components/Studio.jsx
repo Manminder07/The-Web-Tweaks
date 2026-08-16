@@ -19,10 +19,10 @@ export default function Studio() {
   ]
 
   return (
-    <section class="section section-border-top" id="studio">
-      <div class="container">
+    <section className="section section-border-top" id="studio">
+      <div className="container">
         
-        <div class="eyebrow">01 — The Studio</div>
+        <div className="eyebrow">01 — The Studio</div>
 
         <div
           style={{
@@ -35,14 +35,14 @@ export default function Studio() {
           {/* Left Column: Expertise List */}
           <div>
             <h2
-              class="font-editorial"
+              className="font-editorial"
               style={{
                 fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
                 lineHeight: 1.1,
                 marginBottom: '1.5rem',
               }}
             >
-              We refine until it feels <span class="font-script" style={{ color: 'var(--gold)' }}>effortless.</span>
+              We refine until it feels <span className="font-script" style={{ color: 'var(--gold)' }}>effortless.</span>
             </h2>
 
             <p
@@ -109,7 +109,7 @@ export default function Studio() {
 
           {/* Right Column: People / Team Block */}
           <div
-            class="card"
+            className="card"
             style={{
               padding: 'clamp(2rem, 4vw, 3rem)',
               backgroundColor: 'var(--bg2)',
@@ -136,7 +136,7 @@ export default function Studio() {
             </div>
 
             <h3
-              class="font-editorial"
+              className="font-editorial"
               style={{
                 fontSize: '2rem',
                 lineHeight: 1.2,

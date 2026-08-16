@@ -38,17 +38,26 @@ export default function FeaturedProject({ onSelectProject }) {
   }
 
   return (
-    <section class="section section-border-top" id="featured">
-      <div class="container">
+    <section className="section section-border-top" id="featured">
+      <div className="container">
         
         {/* Eyebrow Header */}
-        <div class="eyebrow">Spotlight</div>
+        <div className="eyebrow">Spotlight</div>
 
         {/* Featured Card Wrapper */}
         <div
           onClick={() => onSelectProject(featuredData)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              onSelectProject(featuredData)
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label={`View featured project: ${featuredData.title}`}
           data-view
-          class="card"
+          className="card"
           style={{
             cursor: 'pointer',
             padding: 'clamp(2rem, 5vw, 4rem)',
@@ -83,7 +92,7 @@ export default function FeaturedProject({ onSelectProject }) {
               </div>
 
               <h2
-                class="font-editorial"
+                className="font-editorial"
                 style={{
                   fontSize: 'clamp(2.25rem, 4.5vw, 3.75rem)',
                   lineHeight: 1.15,

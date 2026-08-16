@@ -37,10 +37,10 @@ export default function Faq() {
   }
 
   return (
-    <section class="section section-border-top" id="faq">
-      <div class="container">
+    <section className="section section-border-top" id="faq">
+      <div className="container">
         
-        <div class="eyebrow">Frequently Asked Questions</div>
+        <div className="eyebrow">Frequently Asked Questions</div>
 
         <div
           style={{
@@ -53,14 +53,14 @@ export default function Faq() {
           {/* Header Column */}
           <div>
             <h2
-              class="font-editorial"
+              className="font-editorial"
               style={{
                 fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
                 lineHeight: 1.1,
                 marginBottom: '1.25rem',
               }}
             >
-              Clear answers before we <span class="font-script" style={{ color: 'var(--ember)' }}>begin.</span>
+              Clear answers before we <span className="font-script" style={{ color: 'var(--ember)' }}>begin.</span>
             </h2>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.0625rem', color: 'var(--dim)', lineHeight: 1.6, maxWidth: '480px' }}>
               Have a question not listed here? Drop us a line at{' '}
@@ -78,7 +78,7 @@ export default function Faq() {
               return (
                 <div
                   key={faq.q}
-                  class="card"
+                  className="card"
                   style={{
                     padding: '1.5rem 1.75rem',
                     background: 'var(--bg2)',

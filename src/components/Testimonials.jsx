@@ -44,13 +44,13 @@ export default function Testimonials() {
   const handlePrev = () => setIndex((prev) => (prev - 1 + quotes.length) % quotes.length)
 
   return (
-    <section class="section section-border-top" id="testimonials">
-      <div class="container">
+    <section className="section section-border-top" id="testimonials">
+      <div className="container">
         
-        <div class="eyebrow">Client Endorsements</div>
+        <div className="eyebrow">Client Endorsements</div>
 
         <div
-          class="card"
+          className="card"
           style={{
             padding: 'clamp(2.5rem, 6vw, 4.5rem)',
             background: 'linear-gradient(135deg, var(--bg2) 0%, rgba(11, 10, 8, 0.95) 100%)',
@@ -95,7 +95,7 @@ export default function Testimonials() {
                 </div>
 
                 <blockquote
-                  class="font-editorial"
+                  className="font-editorial"
                   style={{
                     fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)',
                     lineHeight: 1.3,

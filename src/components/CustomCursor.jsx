@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 
 export default function CustomCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 })
   const [mode, setMode] = useState('default') // 'default', 'hover', 'view'
   const [isVisible, setIsVisible] = useState(false)
+  const cursorRef = useRef(null)
+  const modeRef = useRef('default')
 
   useEffect(() => {
     // Hide if mobile screen or touch device
@@ -28,7 +29,9 @@ export default function CustomCursor() {
       currentX += (mouseX - currentX) * 0.18
       currentY += (mouseY - currentY) * 0.18
 
-      setPos({ x: currentX, y: currentY })
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`
+      }
 
       // Check hovered element
       const target = document.elementFromPoint(mouseX, mouseY)
@@ -36,12 +39,16 @@ export default function CustomCursor() {
         const viewEl = target.closest('[data-view]')
         const linkEl = target.closest('a, button, [role="button"], input, textarea, select')
 
+        let nextMode = 'default'
         if (viewEl) {
-          setMode('view')
+          nextMode = 'view'
         } else if (linkEl) {
-          setMode('hover')
-        } else {
-          setMode('default')
+          nextMode = 'hover'
+        }
+
+        if (nextMode !== modeRef.current) {
+          modeRef.current = nextMode
+          setMode(nextMode)
         }
       }
 
@@ -61,16 +68,18 @@ export default function CustomCursor() {
 
   return (
     <div
-      class={`custom-cursor ${
+      ref={cursorRef}
+      className={`custom-cursor ${
         mode === 'view' ? 'cursor-view' : mode === 'hover' ? 'cursor-hover' : 'cursor-dot'
       }`}
       style={{
-        left: `${pos.x}px`,
-        top: `${pos.y}px`,
+        left: 0,
+        top: 0,
       }}
       aria-hidden="true"
     >
-      {mode === 'view' && <span class="cursor-view-text">VIEW</span>}
+      {mode === 'view' && <span className="cursor-view-text">VIEW</span>}
     </div>
   )
 }
+

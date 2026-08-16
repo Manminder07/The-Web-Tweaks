@@ -406,10 +406,55 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* --------------------------------------------------------------------------
-   Global Keyframe Animations
+   Global Keyframe Animations & Components
    -------------------------------------------------------------------------- */
 @keyframes spinContinuous {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Marquee Track */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}
+
+/* Navigation Responsive Helpers */
+.nav-tab-link:hover {
+  color: var(--gold) !important;
+}
+
+@media (max-width: 819px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-menu-toggle {
+    display: flex !important;
+  }
+}
+
+@media (min-width: 820px) {
+  .mobile-menu-toggle {
+    display: none !important;
+  }
 }
 

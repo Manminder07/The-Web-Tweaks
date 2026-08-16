@@ -1,384 +1,117 @@
-# 📖 The Web Tweaks — Developer Guide
+# 📖 The Web Tweaks — Architecture & Developer Guide
 
-> **Purpose:** This file tells you exactly where everything lives and what to edit.
-> No guessing, no digging through code.
+> **Purpose:** Accurate technical reference for **The Web Tweaks** boutique studio website.
+> Covers design tokens, component architecture, Three.js WebGL background, GSAP + Lenis motion system, and content customization.
 
 ---
 
-## 🎨 Global Styles & Theme
+## 🎨 Global Design System & CSS Tokens
 
-**File:** `src/index.css`
+**File:** [`src/index.css`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/index.css)
 
-All visual tokens are in `:root` at the very top of the file. Change these and the entire site updates.
+All primary visual tokens are defined in `:root` at the top of `src/index.css`:
 
-```
+```css
 :root {
-  --color-bg           → Background color
-  --color-text         → Main text color
-  --color-accent       → Primary accent (buttons, links, glows)
-  --color-accent-hover → Accent hover state
-  --color-muted        → Muted/gray text
-  --color-card-bg      → Card background
-  --color-border       → Border colors
+  /* Color Palette */
+  --bg: #0B0A08;                       /* Primary dark background */
+  --bg2: #161310;                      /* Card & panel surface background */
+  --ink: #F3EEE3;                      /* Primary light text & headings */
+  --dim: #948C7C;                      /* Muted body copy & secondary labels */
+  --ember: #E85C1F;                    /* Vibrant ember orange accent (CTAs, kickers) */
+  --gold: #D9A441;                     /* Vintage warm gold accent (eyebrows, script) */
+  --line: rgba(243, 238, 227, 0.12);   /* Subtle border & divider line */
+  --line-strong: rgba(243, 238, 227, 0.26); /* Card border on hover / emphasis */
 
-  --font-heading       → Heading font family (Syne)
-  --font-body          → Body font family (Inter)
-  --font-mono          → Mono font family (DM Mono)
+  /* Typography Stacks */
+  --font-editorial: 'Fraunces', serif;        /* Italic editorial serif headline font */
+  --font-sans-bold: 'Space Grotesk', sans-serif; /* Massive bold sans headlines */
+  --font-script: 'Caveat', cursive;           /* Hand-drawn accent script highlights */
+  --font-body: 'Inter', sans-serif;           /* Clean, legible UI & body font */
+  --font-mono: 'JetBrains Mono', monospace;   /* Technical labels, tags, numbers */
 
-  --section-padding    → Vertical padding for all sections
-  --container-width    → Max content width
-  --border-radius      → Default border radius
-
-  --ease-out           → Animation easing (fast start)
-  --ease-in-out        → Animation easing (smooth)
-  --ease-drawer        → Drawer/slide easing
+  /* Layout & Radii */
+  --container-max: 1280px;
+  --section-padding-y: clamp(4rem, 8vw, 8rem);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
 }
 ```
 
-### To change the accent color:
-→ Open `src/index.css` → Change `--color-accent` value
+---
 
-### To change fonts:
-→ Open `src/index.css` → Change `--font-heading` / `--font-body`
-→ Also update the Google Fonts `<link>` in `index.html`
+## 🏗️ Component Structure
+
+All modular components are located in [`src/components/`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components):
+
+| Component | File | Description |
+| :--- | :--- | :--- |
+| **BackgroundEffects** | [`BackgroundEffects.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/BackgroundEffects.jsx) | Ambient film grain overlay + mouse-reactive glowing smoke blobs |
+| **CustomCursor** | [`CustomCursor.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/CustomCursor.jsx) | Desktop lerp custom cursor with default, link hover, and `[data-view]` states |
+| **Navbar** | [`Navbar.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Navbar.jsx) | Fixed glassmorphism header, monogram badge, desktop tab links, and animated mobile drawer |
+| **Hero** | [`Hero.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Hero.jsx) | Kinetic mixed-typography split reveal, rotating circular badge seal, studio summary |
+| **HeroThreeCanvas**| [`HeroThreeCanvas.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/HeroThreeCanvas.jsx) | Interactive WebGL dual-icosahedron wireframe background in Three.js |
+| **Marquee** | [`Marquee.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Marquee.jsx) | Seamless infinite ticker of studio capabilities |
+| **FeaturedProject**| [`FeaturedProject.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/FeaturedProject.jsx) | Spotlight project card with interactive parallax card and detail modal trigger |
+| **Studio** | [`Studio.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Studio.jsx) | 01 section: Core studio expertise, 6-person team avatar stack, studio guarantee |
+| **Process** | [`Process.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Process.jsx) | 4-step delivery pipeline from Discovery & Architecture to Launch & Care |
+| **Services** | [`Services.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Services.jsx) | 02 section: Service cards with tech tags and bespoke flat-lay SVG desk illustration |
+| **Work** | [`Work.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Work.jsx) | 03 section: 3D interactive tilt cards with metrics & case study modal trigger |
+| **Testimonials** | [`Testimonials.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Testimonials.jsx) | Animated carousel with client endorsements and verified metrics |
+| **Faq** | [`Faq.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Faq.jsx) | Expandable spring-animated accordion for common client questions |
+| **Contact** | [`Contact.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Contact.jsx) | 04 section: Project inquiry brief form, budget selector, studio direct contact info |
+| **Footer** | [`Footer.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Footer.jsx) | Monogram, section navigation, social links, back-to-top button |
+| **CaseStudyModal** | [`CaseStudyModal.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/CaseStudyModal.jsx) | Modal dialog for Problem / Approach / Result breakdown with keyboard lock and escape key handler |
 
 ---
 
-## 🔤 Fonts
+## ⚡ Motion & Physics Architecture
 
-**File:** `index.html` (the `<link>` tag in `<head>`)
+### 1. Lenis Smooth Scrolling + GSAP ScrollTrigger
+**File:** [`src/utils/smoothScroll.js`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/utils/smoothScroll.js)
+- Smooth wheel scrolling integrated with GSAP's `ticker`.
+- `lagSmoothing(0)` ensures seamless scroll synchronicity.
+- Automatically disables when `(prefers-reduced-motion: reduce)` is detected.
 
-```
-Syne 700, 800     → Headings (H1, H2, H3, hero)
-Inter 400, 500, 600 → Body text, buttons, nav
-DM Mono 400       → Section labels like "01 — Services"
-```
+### 2. Three.js WebGL Wireframe Background
+**File:** [`src/components/HeroThreeCanvas.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/HeroThreeCanvas.jsx)
+- Renders an interactive 3D icosahedron wireframe with ember and gold line materials.
+- Gently tilts in response to cursor coordinates.
+- Fully cleans up geometries, materials, and RAF frames on unmount.
 
-### To swap a font:
-1. Go to [fonts.google.com](https://fonts.google.com)
-2. Copy the new `<link>` tag
-3. Replace the existing one in `index.html`
-4. Update `--font-heading` or `--font-body` in `src/index.css`
-
----
-
-## 🧭 Navbar
-
-**File:** `src/components/Navbar.jsx`
-
-### Navigation links:
-Look for the `navLinks` array at the top of the file:
-```js
-const navLinks = [
-  { label: "Work",     path: "/work"     },
-  { label: "Services", path: "/services" },
-  { label: "Process",  path: "#process"  },
-  { label: "About",    path: "/about"    },
-]
-```
-→ Add, remove, or rename links here. The JSX renders them automatically.
-
-### Logo text:
-Search for `"The Web Tweaks"` in the JSX — it's a plain text string.
-
-### CTA button text:
-Search for `"Start a Project"` — it's the button label.
+### 3. Motion (Framer Motion) Micro-Interactions
+- Used in `Navbar` (mobile drawer transitions), `CaseStudyModal` (spring open/close), `Testimonials` (cross-fading quotes), and `Faq` (spring height expansion).
 
 ---
 
-## 🦸 Hero Section
+## 🚀 How to Edit Content
 
-**File:** `src/components/Hero.jsx`
+### To edit Featured or Portfolio Projects:
+1. Open [`src/components/FeaturedProject.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/FeaturedProject.jsx) or [`src/components/Work.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Work.jsx).
+2. Edit the `projects` or `featuredData` object (title, problem, approach, result, metrics, stack).
+3. The card and the interactive modal update automatically!
 
-### Headline:
-Look for the `headline` variable at the top:
-```js
-const headline = "We Build Websites That Actually Convert"
-```
+### To edit FAQs:
+- Open [`src/components/Faq.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Faq.jsx) and add/modify objects in the `faqs` array.
 
-### Subtitle:
-```js
-const subtitle = "..."
-```
-
-### CTA buttons:
-```js
-const ctaPrimary = { label: "Start a Project", link: "/contact" }
-const ctaSecondary = { label: "See Our Work", link: "/work" }
-```
-
-### Mouse tracker orb:
-The glowing orb is in this file. It uses Motion's `useSpring`.
-- To change orb color → search for the gradient/background style
-- To change follow speed → adjust `stiffness` and `damping` values
-- To remove the orb → delete the `<MouseTracker />` component from the JSX
+### To edit Services:
+- Open [`src/components/Services.jsx`](file:///c:/Users/MSI%20GAMING/Documents/Web%20Develpoment/LameWeb/The%20Web%20Tweaks/src/components/Services.jsx) and add/modify items in `serviceList` or `toolChips`.
 
 ---
 
-## 📢 Marquee / Ticker
+## 🛠️ Build & Development Commands
 
-**File:** `src/components/Marquee.jsx`
+```bash
+# Start local development server
+npm run dev
 
-### Ticker items:
-```js
-const marqueeItems = [
-  "React", "Next.js", "GSAP", "Figma", "Webflow", "Motion", "Vite"
-]
+# Build production bundle with optimized chunking
+npm run build
+
+# Preview production build locally
+npm run preview
+
+# Deploy to GitHub Pages
+npm run deploy
 ```
-→ Add or remove items from this array. The animation handles the rest.
-
-### Speed:
-In the CSS (`index.css` or scoped styles), look for:
-```css
-animation: marquee __s linear infinite;
-```
-→ Change the `__s` duration value. Lower = faster.
-
----
-
-## 🛠️ Services Section
-
-**File:** `src/components/Services.jsx`
-
-### Service cards:
-```js
-const services = [
-  {
-    icon: "Palette",         // ← Lucide icon name
-    title: "Web Design",
-    description: "..."
-  },
-  {
-    icon: "Code",
-    title: "Development",
-    description: "..."
-  },
-  // ... more cards
-]
-```
-
-### To add a new service:
-→ Add a new object to the `services` array. That's it.
-
-### To change an icon:
-→ Browse icons at [lucide.dev/icons](https://lucide.dev/icons)
-→ Replace the `icon` string with the new icon name
-
----
-
-## 🔢 Process Section
-
-**File:** `src/components/Process.jsx`
-
-### Steps:
-```js
-const steps = [
-  { number: "01", title: "Discovery",  description: "..." },
-  { number: "02", title: "Design",     description: "..." },
-  { number: "03", title: "Develop",    description: "..." },
-  { number: "04", title: "Launch",     description: "..." },
-]
-```
-→ Add or edit steps here.
-
----
-
-## 💼 Work / Portfolio Section
-
-**File:** `src/components/Work.jsx`
-
-### Projects:
-```js
-const projects = [
-  {
-    title: "Project Name",
-    category: "Web Design",
-    image: "/images/project1.jpg",   // ← put images in public/images/
-    slug: "project-name"
-  },
-  // ... more projects
-]
-```
-
-### To add a new project:
-1. Add your project image to `public/images/`
-2. Add a new object to the `projects` array
-3. Done — the grid auto-expands
-
----
-
-## 📊 Stats Section
-
-**File:** `src/components/Stats.jsx`
-
-### Numbers:
-```js
-const stats = [
-  { value: 50,  suffix: "+", label: "Projects Completed" },
-  { value: 30,  suffix: "+", label: "Happy Clients"      },
-  { value: 3,   suffix: "+", label: "Years Experience"    },
-]
-```
-→ Change `value`, `suffix`, or `label` here.
-→ NumberFlow animates the counting automatically.
-
----
-
-## 💬 Testimonials Section
-
-**File:** `src/components/Testimonials.jsx`
-
-### Quotes:
-```js
-const testimonials = [
-  {
-    quote: "They transformed our online presence...",
-    name: "John Doe",
-    role: "CEO, Company Name",
-    avatar: "/images/avatar1.jpg"   // ← put in public/images/
-  },
-  // ... more testimonials
-]
-```
-→ Add new testimonials by adding objects to the array.
-
----
-
-## 📣 CTA Banner
-
-**File:** `src/components/CtaBanner.jsx`
-
-### Text:
-```js
-const ctaHeadline = "Ready to Build Something Great?"
-const ctaSubtext = "..."
-const ctaButtonLabel = "Get In Touch"
-const ctaButtonLink = "/contact"
-```
-→ Edit these strings to change the CTA content.
-
----
-
-## 🔗 Footer
-
-**File:** `src/components/Footer.jsx`
-
-### Footer links:
-```js
-const footerLinks = [
-  { label: "Work",     path: "/work"     },
-  { label: "Services", path: "/services" },
-  { label: "About",    path: "/about"    },
-  { label: "Contact",  path: "/contact"  },
-]
-```
-
-### Social links:
-```js
-const socials = [
-  { icon: "Twitter",   url: "https://twitter.com/yourhandle"   },
-  { icon: "Instagram", url: "https://instagram.com/yourhandle" },
-  { icon: "Linkedin",  url: "https://linkedin.com/in/yourname" },
-]
-```
-
-### Copyright text:
-Search for `"The Web Tweaks"` in the JSX.
-
----
-
-## 📄 Pages & Routing
-
-**File:** `src/app.jsx`
-
-### Routes:
-```jsx
-<Route path="/"             element={<Home />}        />
-<Route path="/work"         element={<Work />}         />
-<Route path="/work/:slug"   element={<ProjectDetail />}/>
-<Route path="/services"     element={<Services />}     />
-<Route path="/about"        element={<About />}        />
-<Route path="/contact"      element={<Contact />}      />
-```
-
-### To add a new page:
-1. Create `src/pages/NewPage.jsx`
-2. Add a `<Route>` line in `src/app.jsx`
-3. Add a link in `navLinks` (Navbar.jsx) and `footerLinks` (Footer.jsx)
-
----
-
-## 🖼️ Images & Assets
-
-**Location:** `public/images/`
-
-All static images go here. Reference them with `/images/filename.jpg` in your code.
-
-```
-public/
-├── favicon.svg
-├── icons.svg
-└── images/
-    ├── project1.jpg
-    ├── project2.jpg
-    ├── avatar1.jpg
-    └── ...
-```
-
----
-
-## 📱 Responsive Breakpoints
-
-**File:** `src/index.css`
-
-```
-< 640px    → Mobile (1 column, hamburger nav)
-640–1024px → Tablet (2 columns, condensed)
-> 1024px   → Desktop (full layout, 3–4 columns)
-```
-
-Fluid values use `clamp()` — they scale automatically.
-Layout changes use `@media` queries.
-
----
-
-## 🎞️ Animations
-
-### GSAP (scroll-driven)
-- **Files:** Inside each component's `useGSAP()` hook
-- **Scroll triggers** control when things animate in
-- **To disable a section's animation:** Remove the `useGSAP()` block in that component
-
-### Motion (component-level)
-- **Files:** `Navbar.jsx` (mobile menu), any modal/dialog
-- **Spring physics:** Look for `useSpring` / `stiffness` / `damping`
-- **To change animation speed:** Adjust `duration` or spring values
-
-### Marquee
-- **File:** CSS in `index.css` or component styles
-- **Pure CSS** — `animation: marquee Xs linear infinite`
-
-### Mouse Tracker
-- **File:** `src/components/Hero.jsx` (or separate `MouseTracker.jsx`)
-- **To change follow speed:** Edit `stiffness` (higher = snappier) and `damping` (higher = less bounce)
-
----
-
-## ⚡ Quick Reference
-
-| I want to...                  | Go to...                              |
-|-------------------------------|---------------------------------------|
-| Change site colors            | `src/index.css` → `:root`             |
-| Change fonts                  | `index.html` + `src/index.css` `:root`|
-| Edit hero headline            | `src/components/Hero.jsx` → top       |
-| Add a service card            | `src/components/Services.jsx` → array |
-| Add a portfolio project       | `src/components/Work.jsx` → array     |
-| Change stat numbers           | `src/components/Stats.jsx` → array    |
-| Add a testimonial             | `src/components/Testimonials.jsx`     |
-| Change CTA text               | `src/components/CtaBanner.jsx` → top  |
-| Add a nav link                | `src/components/Navbar.jsx` → array   |
-| Add social links              | `src/components/Footer.jsx` → array   |
-| Add a new page                | `src/pages/` + route in `app.jsx`     |
-| Add project images            | `public/images/`                      |
-| Disable an animation          | Remove `useGSAP()` from that file     |
-| Change mouse tracker speed    | `stiffness` / `damping` values        |

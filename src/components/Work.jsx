@@ -49,22 +49,22 @@ export default function Work({ onSelectProject }) {
   ]
 
   return (
-    <section class="section section-border-top" id="work">
-      <div class="container">
+    <section className="section section-border-top" id="work">
+      <div className="container">
         
-        <div class="eyebrow">03 — Selected Work</div>
+        <div className="eyebrow">03 — Selected Work</div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: '2rem', marginBottom: '4rem' }}>
           <div>
             <h2
-              class="font-editorial"
+              className="font-editorial"
               style={{
                 fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
                 lineHeight: 1.1,
                 marginBottom: '1rem',
               }}
             >
-              Crafted with <span class="font-script" style={{ color: 'var(--gold)' }}>obsessive detail.</span>
+              Crafted with <span className="font-script" style={{ color: 'var(--gold)' }}>obsessive detail.</span>
             </h2>
             <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.0625rem', color: 'var(--dim)', maxWidth: '580px' }}>
               Explore a selection of recent digital builds. Each project represents a bespoke solution tailored to the brand’s unique identity.
@@ -117,10 +117,19 @@ function ProjectTiltCard({ project, onSelectProject }) {
   return (
     <motion.div
       onClick={() => onSelectProject(project)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onSelectProject(project)
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`View project details: ${project.title}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       data-view
-      class="card card-interactive"
+      className="card card-interactive"
       style={{
         cursor: 'pointer',
         padding: '1.75rem',
@@ -175,7 +184,7 @@ function ProjectTiltCard({ project, onSelectProject }) {
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--ember)', textTransform: 'uppercase' }}>
             {project.category}
           </span>
-          <h3 class="font-editorial" style={{ fontSize: '1.625rem', color: 'var(--ink)', marginTop: '0.25rem' }}>
+          <h3 className="font-editorial" style={{ fontSize: '1.625rem', color: 'var(--ink)', marginTop: '0.25rem' }}>
             {project.title}
           </h3>
         </div>

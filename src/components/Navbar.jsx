@@ -60,7 +60,7 @@ export default function Navbar() {
           borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
         }}
       >
-        <div class="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           
           {/* Logo Mark + Wordmark */}
           <a
@@ -114,7 +114,7 @@ export default function Navbar() {
               alignItems: 'center',
               gap: '2rem',
             }}
-            class="desktop-nav"
+            className="desktop-nav"
           >
             {navItems.map((item) => (
               <a
@@ -128,7 +128,7 @@ export default function Navbar() {
                   color: 'var(--ink)',
                   transition: 'color 0.2s ease',
                 }}
-                class="nav-tab-link"
+                className="nav-tab-link"
               >
                 <span
                   style={{
@@ -193,7 +193,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
               aria-expanded={isOpen}
-              class="mobile-menu-toggle"
+              className="mobile-menu-toggle"
               style={{
                 width: '42px',
                 height: '42px',
@@ -315,7 +315,7 @@ export default function Navbar() {
                 <a
                   href="#contact"
                   onClick={() => setIsOpen(false)}
-                  class="btn-primary"
+                  className="btn-primary"
                   style={{ width: '100%' }}
                 >
                   <span>Start a Project</span>
@@ -329,26 +329,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-
-      {/* Nav Responsive Styling */}
-      <style>{`
-        @media (max-width: 819px) {
-          .desktop-nav {
-            display: none !important;
-          }
-          .mobile-menu-toggle {
-            display: flex !important;
-          }
-        }
-        @media (min-width: 820px) {
-          .mobile-menu-toggle {
-            display: none !important;
-          }
-        }
-        .nav-tab-link:hover {
-          color: var(--gold) !important;
-        }
-      `}</style>
     </>
   )
 }

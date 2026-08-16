@@ -38,10 +38,10 @@ export default function Services() {
   ]
 
   return (
-    <section class="section section-border-top" id="services">
-      <div class="container">
+    <section className="section section-border-top" id="services">
+      <div className="container">
         
-        <div class="eyebrow">02 — What We Do</div>
+        <div className="eyebrow">02 — What We Do</div>
 
         <div
           style={{
@@ -55,14 +55,14 @@ export default function Services() {
           {/* Left Column: Services Header & List */}
           <div>
             <h2
-              class="font-editorial"
+              className="font-editorial"
               style={{
                 fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
                 lineHeight: 1.1,
                 marginBottom: '1.5rem',
               }}
             >
-              Every tweak engineered for <span class="font-script" style={{ color: 'var(--ember)' }}>conversion.</span>
+              Every tweak engineered for <span className="font-script" style={{ color: 'var(--ember)' }}>conversion.</span>
             </h2>
 
             <p
@@ -81,7 +81,7 @@ export default function Services() {
               {serviceList.map((service, i) => (
                 <div
                   key={service.title}
-                  class="card"
+                  className="card"
                   style={{
                     padding: '1.75rem',
                     background: 'var(--bg2)',
@@ -127,7 +127,7 @@ export default function Services() {
           {/* Right Column: Hand-built Isometric SVG Desk Flat-Lay Illustration */}
           <div>
             <div
-              class="card"
+              className="card"
               style={{
                 padding: '2rem',
                 background: 'linear-gradient(145deg, var(--bg2) 0%, rgba(11,10,8,0.9) 100%)',

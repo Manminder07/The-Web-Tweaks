@@ -33,7 +33,7 @@ export default function Marquee() {
       }}
       aria-label="Studio capabilities marquee"
     >
-      <div class="marquee-track">
+      <div className="marquee-track">
         {list.map((item, i) => (
           <span
             key={i}
@@ -64,32 +64,7 @@ export default function Marquee() {
           </span>
         ))}
       </div>
-
-      <style>{`
-        .marquee-track {
-          display: flex;
-          width: max-content;
-          animation: marqueeScroll 28s linear infinite;
-        }
-
-        .marquee-track:hover {
-          animation-play-state: paused;
-        }
-
-        @keyframes marqueeScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .marquee-track {
-            animation: none;
-            width: 100%;
-            justify-content: space-around;
-            flex-wrap: wrap;
-          }
-        }
-      `}</style>
     </div>
   )
 }
+

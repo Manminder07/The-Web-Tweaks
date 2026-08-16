@@ -18,10 +18,10 @@ export default function Contact() {
   }
 
   return (
-    <section class="section section-border-top" id="contact">
-      <div class="container">
+    <section className="section section-border-top" id="contact">
+      <div className="container">
         
-        <div class="eyebrow">04 — Start a Project</div>
+        <div className="eyebrow">04 — Start a Project</div>
 
         <div
           style={{
@@ -34,14 +34,14 @@ export default function Contact() {
           {/* Left Column: Inquiry Form / Prompt */}
           <div>
             <h2
-              class="font-editorial"
+              className="font-editorial"
               style={{
                 fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
                 lineHeight: 1.1,
                 marginBottom: '1.25rem',
               }}
             >
-              Let’s make something <span class="font-script" style={{ color: 'var(--gold)' }}>unforgettable.</span>
+              Let’s make something <span className="font-script" style={{ color: 'var(--gold)' }}>unforgettable.</span>
             </h2>
 
             <p
@@ -60,7 +60,7 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                class="card"
+                className="card"
                 style={{
                   padding: '2.5rem',
                   backgroundColor: 'rgba(232, 92, 31, 0.08)',
@@ -71,7 +71,7 @@ export default function Contact() {
                 <div style={{ display: 'inline-flex', padding: '1rem', borderRadius: '50%', backgroundColor: 'var(--ember)', color: '#FFF', marginBottom: '1rem' }}>
                   <CheckCircle2 size={32} />
                 </div>
-                <h3 class="font-editorial" style={{ fontSize: '1.75rem', marginBottom: '0.5rem', color: 'var(--ink)' }}>
+                <h3 className="font-editorial" style={{ fontSize: '1.75rem', marginBottom: '0.5rem', color: 'var(--ink)' }}>
                   Inquiry Received!
                 </h3>
                 <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.9375rem', color: 'var(--dim)' }}>
@@ -190,7 +190,7 @@ export default function Contact() {
 
                 <motion.button
                   type="submit"
-                  class="btn-primary"
+                  className="btn-primary"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }}
@@ -206,7 +206,7 @@ export default function Contact() {
 
           {/* Right Column: Studio Detail Block */}
           <div
-            class="card"
+            className="card"
             style={{
               padding: 'clamp(2rem, 4vw, 3rem)',
               backgroundColor: 'var(--bg2)',
@@ -233,7 +233,7 @@ export default function Contact() {
               <span>BOOKING STATUS: ACCEPTING Q3 / Q4 PROJECTS</span>
             </div>
 
-            <h3 class="font-editorial" style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--ink)' }}>
+            <h3 className="font-editorial" style={{ fontSize: '2rem', marginBottom: '2rem', color: 'var(--ink)' }}>
               Studio Direct Contact
             </h3>
 

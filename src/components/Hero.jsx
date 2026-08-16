@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, lazy, Suspense } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { motion } from 'motion/react'
 import { ArrowDown, Sparkles } from 'lucide-react'
-import HeroThreeCanvas from './HeroThreeCanvas'
+
+const HeroThreeCanvas = lazy(() => import('./HeroThreeCanvas'))
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -74,14 +75,16 @@ export default function Hero() {
       }}
     >
       {/* Three.js WebGL Decorative Background */}
-      <HeroThreeCanvas />
+      <Suspense fallback={null}>
+        <HeroThreeCanvas />
+      </Suspense>
 
-      <div class="container" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Top Kicker */}
-        <div class="hero-fade-item" style={{ marginBottom: '1.25rem' }}>
+        <div className="hero-fade-item" style={{ marginBottom: '1.25rem' }}>
           <span
-            class="font-script"
+            className="font-script"
             style={{
               fontSize: 'clamp(1.25rem, 2.5vw, 1.75rem)',
               letterSpacing: '0.02em',
@@ -96,7 +99,7 @@ export default function Hero() {
           {/* Line 1: thin italic serif */}
           <div style={{ overflow: 'hidden' }}>
             <div
-              class="split-line-inner font-editorial"
+              className="split-line-inner font-editorial"
               style={{
                 fontSize: 'clamp(2.5rem, 6.5vw, 5.5rem)',
                 lineHeight: 1.05,
@@ -111,7 +114,7 @@ export default function Hero() {
           {/* Line 2: huge outlined bold sans */}
           <div style={{ overflow: 'hidden' }}>
             <div
-              class="split-line-inner font-sans-bold text-stroke"
+              className="split-line-inner font-sans-bold text-stroke"
               style={{
                 fontSize: 'clamp(3.5rem, 11vw, 9.5rem)',
                 lineHeight: 0.9,
@@ -126,7 +129,7 @@ export default function Hero() {
           {/* Line 3: huge filled bold sans */}
           <div style={{ overflow: 'hidden' }}>
             <div
-              class="split-line-inner font-sans-bold"
+              className="split-line-inner font-sans-bold"
               style={{
                 fontSize: 'clamp(3.5rem, 11vw, 9.5rem)',
                 lineHeight: 0.9,
@@ -142,7 +145,7 @@ export default function Hero() {
 
         {/* Tagline Row + Seal Badge */}
         <div
-          class="hero-fade-item"
+          className="hero-fade-item"
           style={{
             display: 'flex',
             flexWrap: 'wrap',
@@ -234,7 +237,7 @@ export default function Hero() {
         </div>
 
         {/* Closing Line */}
-        <div class="hero-fade-item" style={{ marginBottom: '3.5rem' }}>
+        <div className="hero-fade-item" style={{ marginBottom: '3.5rem' }}>
           <p
             style={{
               fontFamily: 'var(--font-editorial)',
@@ -244,7 +247,7 @@ export default function Hero() {
             }}
           >
             for people who{' '}
-            <span class="font-script" style={{ fontSize: '1.25em', color: 'var(--gold)' }}>
+            <span className="font-script" style={{ fontSize: '1.25em', color: 'var(--gold)' }}>
               notice
             </span>{' '}
             the details.
@@ -253,7 +256,7 @@ export default function Hero() {
 
         {/* Hero Footer Row: CTAs & Studio Summary */}
         <div
-          class="hero-fade-item"
+          className="hero-fade-item"
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
@@ -265,7 +268,7 @@ export default function Hero() {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem', alignItems: 'center' }}>
             <motion.a
               href="#contact"
-              class="btn-primary"
+              className="btn-primary"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -277,7 +280,7 @@ export default function Hero() {
 
             <motion.a
               href="#work"
-              class="btn-secondary"
+              className="btn-secondary"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
@@ -304,9 +307,6 @@ export default function Hero() {
         </div>
 
       </div>
-
     </section>
   )
 }
-
-

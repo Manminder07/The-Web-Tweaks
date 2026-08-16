@@ -33,21 +33,21 @@ export default function Process() {
   ]
 
   return (
-    <section class="section section-border-top" id="process">
-      <div class="container">
+    <section className="section section-border-top" id="process">
+      <div className="container">
         
-        <div class="eyebrow">How We Work</div>
+        <div className="eyebrow">How We Work</div>
 
         <div style={{ marginBottom: '4rem' }}>
           <h2
-            class="font-editorial"
+            className="font-editorial"
             style={{
               fontSize: 'clamp(2.5rem, 5vw, 4.25rem)',
               lineHeight: 1.1,
               marginBottom: '1rem',
             }}
           >
-            A clear timeline with <span class="font-script" style={{ color: 'var(--gold)' }}>no surprises.</span>
+            A clear timeline with <span className="font-script" style={{ color: 'var(--gold)' }}>no surprises.</span>
           </h2>
           <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.0625rem', color: 'var(--dim)', maxWidth: '600px' }}>
             Four structured phases designed to deliver bespoke craft within weeks, keeping you informed at every milestone.
@@ -65,7 +65,7 @@ export default function Process() {
           {steps.map((step) => (
             <div
               key={step.num}
-              class="card"
+              className="card"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
