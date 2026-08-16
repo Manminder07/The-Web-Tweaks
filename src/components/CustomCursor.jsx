@@ -1,82 +1,84 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 export default function CustomCursor() {
-  const [mode, setMode] = useState('default') // 'default', 'hover', 'view'
-  const cursorRef = useRef(null)
-  const modeRef = useRef('default')
+  const containerRef = useRef(null)
+  const innerRef = useRef(null)
+  const textRef = useRef(null)
 
   useEffect(() => {
-    // If reduced motion is requested, don't show custom cursor
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const container = containerRef.current
+    const inner = innerRef.current
+    const text = textRef.current
+    if (!container || !inner) return
 
     let mouseX = -100
     let mouseY = -100
     let currentX = -100
     let currentY = -100
+    let currentMode = 'default'
+    let isVisible = false
     let animFrameId
-    let isMouseActive = false
 
-    const handleMouseMove = (e) => {
+    const onMouseMove = (e) => {
       mouseX = e.clientX
       mouseY = e.clientY
 
-      if (!isMouseActive) {
-        isMouseActive = true
+      if (!isVisible) {
+        isVisible = true
         currentX = mouseX
         currentY = mouseY
-        if (cursorRef.current) {
-          cursorRef.current.style.display = 'flex'
-          cursorRef.current.style.opacity = '1'
-        }
+        container.style.opacity = '1'
       }
     }
 
-    const handleTouchStart = () => {
-      isMouseActive = false
-      if (cursorRef.current) {
-        cursorRef.current.style.display = 'none'
-        cursorRef.current.style.opacity = '0'
-      }
+    const onMouseLeave = () => {
+      isVisible = false
+      container.style.opacity = '0'
     }
 
-    const handleMouseLeave = () => {
-      if (cursorRef.current) {
-        cursorRef.current.style.opacity = '0'
-      }
+    const onMouseEnter = () => {
+      isVisible = true
+      container.style.opacity = '1'
     }
 
-    const handleMouseEnter = () => {
-      if (isMouseActive && cursorRef.current) {
-        cursorRef.current.style.opacity = '1'
-      }
+    const onTouchStart = () => {
+      isVisible = false
+      container.style.opacity = '0'
     }
 
     const animate = () => {
-      if (isMouseActive) {
+      if (isVisible) {
         // High-precision smooth follow
-        currentX += (mouseX - currentX) * 0.2
-        currentY += (mouseY - currentY) * 0.2
+        currentX += (mouseX - currentX) * 0.22
+        currentY += (mouseY - currentY) * 0.22
 
-        if (cursorRef.current) {
-          cursorRef.current.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`
-        }
+        container.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`
 
         // Detect hover state
         const target = document.elementFromPoint(mouseX, mouseY)
-        if (target) {
-          const viewEl = target.closest('[data-view]')
-          const linkEl = target.closest('a, button, [role="button"], input, textarea, select')
+        let nextMode = 'default'
 
-          let nextMode = 'default'
-          if (viewEl) {
+        if (target) {
+          if (target.closest('[data-view]')) {
             nextMode = 'view'
-          } else if (linkEl) {
+          } else if (target.closest('a, button, [role="button"], input, textarea, select, label')) {
             nextMode = 'hover'
           }
+        }
 
-          if (nextMode !== modeRef.current) {
-            modeRef.current = nextMode
-            setMode(nextMode)
+        if (nextMode !== currentMode) {
+          currentMode = nextMode
+          if (nextMode === 'view') {
+            inner.className = 'custom-cursor-inner cursor-view'
+            if (text) text.style.display = 'block'
+          } else if (nextMode === 'hover') {
+            inner.className = 'custom-cursor-inner cursor-hover'
+            if (text) text.style.display = 'none'
+          } else {
+            inner.className = 'custom-cursor-inner cursor-dot'
+            if (text) text.style.display = 'none'
           }
         }
       }
@@ -84,44 +86,42 @@ export default function CustomCursor() {
       animFrameId = requestAnimationFrame(animate)
     }
 
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-    window.addEventListener('touchstart', handleTouchStart, { passive: true })
-    document.addEventListener('mouseleave', handleMouseLeave)
-    document.addEventListener('mouseenter', handleMouseEnter)
+    window.addEventListener('mousemove', onMouseMove, { passive: true })
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    document.addEventListener('mouseleave', onMouseLeave)
+    document.addEventListener('mouseenter', onMouseEnter)
     animFrameId = requestAnimationFrame(animate)
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('touchstart', handleTouchStart)
-      document.removeEventListener('mouseleave', handleMouseLeave)
-      document.removeEventListener('mouseenter', handleMouseEnter)
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('touchstart', onTouchStart)
+      document.removeEventListener('mouseleave', onMouseLeave)
+      document.removeEventListener('mouseenter', onMouseEnter)
       cancelAnimationFrame(animFrameId)
     }
   }, [])
 
   return (
     <div
-      ref={cursorRef}
+      ref={containerRef}
       className="custom-cursor-container"
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
         pointerEvents: 'none',
-        zIndex: 99999,
-        display: 'none',
+        zIndex: 999999,
         opacity: 0,
-        transition: 'opacity 0.2s ease',
         willChange: 'transform',
+        transform: 'translate3d(-100px, -100px, 0)',
+        transition: 'opacity 0.2s ease',
       }}
       aria-hidden="true"
     >
-      <div
-        className={`custom-cursor-inner ${
-          mode === 'view' ? 'cursor-view' : mode === 'hover' ? 'cursor-hover' : 'cursor-dot'
-        }`}
-      >
-        {mode === 'view' && <span className="cursor-view-text">VIEW</span>}
+      <div ref={innerRef} className="custom-cursor-inner cursor-dot">
+        <span ref={textRef} className="cursor-view-text" style={{ display: 'none' }}>
+          VIEW
+        </span>
       </div>
     </div>
   )

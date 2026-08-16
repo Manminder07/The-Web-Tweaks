@@ -259,14 +259,15 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 999999;
   will-change: transform;
 }
 
 .custom-cursor-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -274,8 +275,9 @@ h1, h2, h3, h4, h5, h6 {
   transition: width 0.25s var(--ease-out-expo),
               height 0.25s var(--ease-out-expo),
               background-color 0.25s ease,
-              border 0.25s ease,
+              border-color 0.25s ease,
               opacity 0.25s ease;
+  pointer-events: none;
 }
 
 .cursor-dot {
@@ -294,9 +296,18 @@ h1, h2, h3, h4, h5, h6 {
 .cursor-view {
   width: 84px;
   height: 84px;
-  background-color: rgba(11, 10, 8, 0.88);
+  background-color: rgba(11, 10, 8, 0.9);
+  position: relative;
+}
+
+.cursor-view::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
   border: 1.5px dashed var(--gold);
-  animation: cursorInnerRotate 12s linear infinite;
+  animation: cursorBadgeSpin 12s linear infinite;
+  pointer-events: none;
 }
 
 .cursor-view-text {
@@ -306,9 +317,11 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: 0.1em;
   color: var(--ink);
   text-transform: uppercase;
+  position: relative;
+  z-index: 2;
 }
 
-@keyframes cursorInnerRotate {
+@keyframes cursorBadgeSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
