@@ -313,8 +313,8 @@ h1, h2, h3, h4, h5, h6 {
   to { transform: rotate(360deg); }
 }
 
-/* Hide custom cursor on mobile / touch / small screens */
-@media (max-width: 900px), (pointer: coarse) {
+/* Hide custom cursor on small mobile screens (<768px) */
+@media (max-width: 768px) {
   .custom-cursor-container {
     display: none !important;
   }
@@ -428,19 +428,13 @@ h1, h2, h3, h4, h5, h6 {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marqueeScroll 28s linear infinite;
+  will-change: transform;
+  animation: marqueeScroll 24s linear infinite;
 }
 
-.marquee-track:hover {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-    width: 100%;
-    justify-content: space-around;
-    flex-wrap: wrap;
+@media (hover: hover) and (pointer: fine) {
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
 }
 

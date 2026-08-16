@@ -4,31 +4,38 @@ export default function CustomCursor() {
   const [mode, setMode] = useState('default') // 'default', 'hover', 'view'
   const cursorRef = useRef(null)
   const modeRef = useRef('default')
-  const isVisibleRef = useRef(false)
 
   useEffect(() => {
-    // Disable on mobile / touch devices
-    const isMobileOrTouch = window.innerWidth < 901 || window.matchMedia('(pointer: coarse)').matches
-    if (isMobileOrTouch) return
+    // If reduced motion is requested, don't show custom cursor
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     let mouseX = -100
     let mouseY = -100
     let currentX = -100
     let currentY = -100
     let animFrameId
-    let hasMoved = false
+    let isMouseActive = false
 
     const handleMouseMove = (e) => {
       mouseX = e.clientX
       mouseY = e.clientY
 
-      if (!hasMoved) {
-        hasMoved = true
+      if (!isMouseActive) {
+        isMouseActive = true
         currentX = mouseX
         currentY = mouseY
         if (cursorRef.current) {
+          cursorRef.current.style.display = 'flex'
           cursorRef.current.style.opacity = '1'
         }
+      }
+    }
+
+    const handleTouchStart = () => {
+      isMouseActive = false
+      if (cursorRef.current) {
+        cursorRef.current.style.display = 'none'
+        cursorRef.current.style.opacity = '0'
       }
     }
 
@@ -39,16 +46,16 @@ export default function CustomCursor() {
     }
 
     const handleMouseEnter = () => {
-      if (hasMoved && cursorRef.current) {
+      if (isMouseActive && cursorRef.current) {
         cursorRef.current.style.opacity = '1'
       }
     }
 
     const animate = () => {
-      if (hasMoved) {
-        // Smooth lerp follow
-        currentX += (mouseX - currentX) * 0.18
-        currentY += (mouseY - currentY) * 0.18
+      if (isMouseActive) {
+        // High-precision smooth follow
+        currentX += (mouseX - currentX) * 0.2
+        currentY += (mouseY - currentY) * 0.2
 
         if (cursorRef.current) {
           cursorRef.current.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) translate(-50%, -50%)`
@@ -78,12 +85,14 @@ export default function CustomCursor() {
     }
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    window.addEventListener('touchstart', handleTouchStart, { passive: true })
     document.addEventListener('mouseleave', handleMouseLeave)
     document.addEventListener('mouseenter', handleMouseEnter)
     animFrameId = requestAnimationFrame(animate)
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('touchstart', handleTouchStart)
       document.removeEventListener('mouseleave', handleMouseLeave)
       document.removeEventListener('mouseenter', handleMouseEnter)
       cancelAnimationFrame(animFrameId)
@@ -100,8 +109,8 @@ export default function CustomCursor() {
         left: 0,
         pointerEvents: 'none',
         zIndex: 99999,
+        display: 'none',
         opacity: 0,
-        transform: 'translate3d(-100px, -100px, 0) translate(-50%, -50%)',
         transition: 'opacity 0.2s ease',
         willChange: 'transform',
       }}
@@ -117,5 +126,3 @@ export default function CustomCursor() {
     </div>
   )
 }
-
-

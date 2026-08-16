@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 
 export default function Testimonials() {
   const [index, setIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
 
   const quotes = [
     {
@@ -32,13 +33,14 @@ export default function Testimonials() {
     },
   ]
 
-  // Auto-advance every 7 seconds
+  // Auto-advance every 6 seconds, pausing on user hover
   useEffect(() => {
+    if (isPaused) return
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % quotes.length)
-    }, 7000)
+    }, 6000)
     return () => clearInterval(timer)
-  }, [quotes.length])
+  }, [index, isPaused, quotes.length])
 
   const handleNext = () => setIndex((prev) => (prev + 1) % quotes.length)
   const handlePrev = () => setIndex((prev) => (prev - 1 + quotes.length) % quotes.length)
@@ -51,6 +53,8 @@ export default function Testimonials() {
 
         <div
           className="card"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
           style={{
             padding: 'clamp(2.5rem, 6vw, 4.5rem)',
             background: 'linear-gradient(135deg, var(--bg2) 0%, rgba(11, 10, 8, 0.95) 100%)',
