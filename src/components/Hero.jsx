@@ -215,6 +215,7 @@ export default function Hero() {
 
           {/* Rotating Circular Seal Badge */}
           <div
+            ref={sealRef}
             style={{
               position: 'relative',
               width: '110px',
@@ -222,11 +223,11 @@ export default function Hero() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              willChange: 'transform',
             }}
           >
             {/* Outer Rotating Text Ring */}
             <svg
-              ref={sealRef}
               viewBox="0 0 100 100"
               aria-hidden="true"
               role="presentation"
