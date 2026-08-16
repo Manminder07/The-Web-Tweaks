@@ -254,13 +254,19 @@ h1, h2, h3, h4, h5, h6 {
 /* --------------------------------------------------------------------------
    Custom Cursor (Desktop Only)
    -------------------------------------------------------------------------- */
-.custom-cursor {
+.custom-cursor-container {
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.custom-cursor-inner {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -268,8 +274,8 @@ h1, h2, h3, h4, h5, h6 {
   transition: width 0.25s var(--ease-out-expo),
               height 0.25s var(--ease-out-expo),
               background-color 0.25s ease,
-              border 0.25s ease;
-  will-change: transform;
+              border 0.25s ease,
+              opacity 0.25s ease;
 }
 
 .cursor-dot {
@@ -279,8 +285,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .cursor-hover {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   background-color: var(--gold);
   opacity: 0.85;
 }
@@ -288,9 +294,9 @@ h1, h2, h3, h4, h5, h6 {
 .cursor-view {
   width: 84px;
   height: 84px;
-  background-color: rgba(11, 10, 8, 0.85);
+  background-color: rgba(11, 10, 8, 0.88);
   border: 1.5px dashed var(--gold);
-  animation: cursorRotate 12s linear infinite;
+  animation: cursorInnerRotate 12s linear infinite;
 }
 
 .cursor-view-text {
@@ -302,14 +308,14 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
-@keyframes cursorRotate {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to { transform: translate(-50%, -50%) rotate(360deg); }
+@keyframes cursorInnerRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Hide custom cursor on mobile / touch / small screens */
 @media (max-width: 900px), (pointer: coarse) {
-  .custom-cursor {
+  .custom-cursor-container {
     display: none !important;
   }
 }
@@ -398,7 +404,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 
   .smoke-blob,
-  .custom-cursor,
+  .custom-cursor-container,
   .curtain-panel,
   .cursor-view {
     display: none !important;
