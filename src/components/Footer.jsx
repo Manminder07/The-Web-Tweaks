@@ -55,7 +55,7 @@ export default function Footer() {
                   justifyContent: 'center',
                 }}
               >
-                <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+                <svg width="18" height="18" viewBox="0 0 100 100" fill="none" aria-hidden="true">
                   <circle cx="50" cy="50" r="46" stroke="var(--ember)" strokeWidth="4"/>
                   <path d="M25 35 L38 68 L50 45 L62 68 L75 35" stroke="var(--gold)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
@@ -114,22 +114,22 @@ export default function Footer() {
             </div>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               <li>
-                <a href="mailto:hello@thewebtweaks.com" style={{ color: 'var(--ember)', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.875rem' }}>
+                <a href="mailto:hello@thewebtweaks.com" aria-label="Send email to hello@thewebtweaks.com" style={{ color: 'var(--ember)', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.875rem' }}>
                   hello@thewebtweaks.com
                 </a>
               </li>
               <li>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
+                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Visit our X Twitter profile" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
                   X / Twitter
                 </a>
               </li>
               <li>
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="Visit our GitHub profile" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="Visit our LinkedIn profile" style={{ color: 'var(--dim)', textDecoration: 'none', fontFamily: 'var(--font-body)', fontSize: '0.9375rem' }}>
                   LinkedIn
                 </a>
               </li>
@@ -148,7 +148,7 @@ export default function Footer() {
           {/* Back to top button */}
           <button
             onClick={scrollToTop}
-            aria-label="Scroll back to top"
+            aria-label="Scroll back to top of page"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -164,7 +164,7 @@ export default function Footer() {
             }}
           >
             <span>Back to top</span>
-            <ArrowUp size={16} />
+            <ArrowUp size={16} aria-hidden="true" />
           </button>
 
         </div>

@@ -88,8 +88,11 @@ export default function Contact() {
                   </label>
                   <input
                     id="contact-name"
+                    name="name"
+                    autoComplete="name"
                     type="text"
                     required
+                    aria-required="true"
                     placeholder="e.g. Marcus Thorne"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -114,8 +117,11 @@ export default function Contact() {
                   </label>
                   <input
                     id="contact-email"
+                    name="email"
+                    autoComplete="email"
                     type="email"
                     required
+                    aria-required="true"
                     placeholder="marcus@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -140,6 +146,7 @@ export default function Contact() {
                   </label>
                   <select
                     id="contact-budget"
+                    name="budget"
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                     style={{
@@ -169,6 +176,7 @@ export default function Contact() {
                   </label>
                   <textarea
                     id="contact-message"
+                    name="message"
                     rows={4}
                     placeholder="Tell us a little about your brand, current challenges, and desired launch date..."
                     value={formData.message}

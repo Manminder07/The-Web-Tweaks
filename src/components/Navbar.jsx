@@ -89,7 +89,7 @@ export default function Navbar() {
                 transition: 'border-color 0.3s ease, transform 0.3s ease',
               }}
             >
-              <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+              <svg width="22" height="22" viewBox="0 0 100 100" fill="none" aria-hidden="true">
                 <circle cx="50" cy="50" r="46" stroke="var(--ember)" strokeWidth="4"/>
                 <path d="M25 35 L38 68 L50 45 L62 68 L75 35" stroke="var(--gold)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -109,6 +109,7 @@ export default function Navbar() {
 
           {/* Desktop Nav Items (≥820px) */}
           <nav
+            aria-label="Main Navigation"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -185,7 +186,7 @@ export default function Navbar() {
               }}
               title="Start a project"
             >
-              <ArrowUpRight size={20} />
+              <ArrowUpRight size={20} aria-hidden="true" />
             </a>
 
             {/* Mobile Hamburger Toggle (<820px) */}
@@ -207,7 +208,7 @@ export default function Navbar() {
                 cursor: 'pointer',
               }}
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
             </button>
           </div>
 

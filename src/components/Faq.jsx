@@ -121,7 +121,7 @@ export default function Faq() {
                         transition: 'background-color 0.3s ease, color 0.3s ease',
                       }}
                     >
-                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                      {isOpen ? <Minus size={16} aria-hidden="true" /> : <Plus size={16} aria-hidden="true" />}
                     </div>
                   </button>
 

@@ -18,9 +18,10 @@ export function initSmoothScroll() {
 
   window.scrollTo(0, 0)
 
-  // Check if reduced motion is requested
+  // Check if reduced motion is requested or mobile touch device
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  if (prefersReducedMotion) {
+  const isMobileTouch = window.innerWidth < 901 || window.matchMedia('(pointer: coarse)').matches
+  if (prefersReducedMotion || isMobileTouch) {
     return null
   }
 
@@ -28,7 +29,7 @@ export function initSmoothScroll() {
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     smoothWheel: true,
-    touchMultiplier: 1.5,
+    syncTouch: false,
   })
 
   // Force Lenis to position 0 immediately

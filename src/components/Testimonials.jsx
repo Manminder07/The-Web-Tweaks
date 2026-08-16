@@ -60,8 +60,8 @@ export default function Testimonials() {
           }}
         >
           {/* Background Quote Icon */}
-          <div style={{ position: 'absolute', top: '1.5rem', right: '2rem', opacity: 0.06, color: 'var(--gold)' }}>
-            <Quote size={140} />
+          <div aria-hidden="true" style={{ position: 'absolute', top: '1.5rem', right: '2rem', opacity: 0.06, color: 'var(--gold)' }}>
+            <Quote size={140} aria-hidden="true" />
           </div>
 
           <div style={{ maxWidth: '820px', position: 'relative', zIndex: 1 }}>
@@ -135,6 +135,7 @@ export default function Testimonials() {
                     key={i}
                     onClick={() => setIndex(i)}
                     aria-label={`Go to testimonial ${i + 1}`}
+                    aria-current={i === index ? 'true' : undefined}
                     style={{
                       width: i === index ? '32px' : '10px',
                       height: '10px',
@@ -167,7 +168,7 @@ export default function Testimonials() {
                     transition: 'border-color 0.2s ease, color 0.2s ease',
                   }}
                 >
-                  <ChevronLeft size={20} />
+                  <ChevronLeft size={20} aria-hidden="true" />
                 </button>
                 <button
                   onClick={handleNext}
@@ -186,7 +187,7 @@ export default function Testimonials() {
                     transition: 'border-color 0.2s ease, color 0.2s ease',
                   }}
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={20} aria-hidden="true" />
                 </button>
               </div>
 

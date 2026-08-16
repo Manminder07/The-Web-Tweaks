@@ -158,6 +158,8 @@ export default function Services() {
                   viewBox="0 0 400 400"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="Studio workstation flat-lay illustration with monitor, camera, pencil, and coffee"
                   style={{ width: '100%', height: '100%', filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.5))' }}
                 >
                   {/* Desk Surface Grid Base */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, lazy, Suspense } from 'react'
+import React, { useEffect, useRef, useState, lazy, Suspense } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { motion } from 'motion/react'
@@ -12,6 +12,22 @@ export default function Hero() {
   const heroRef = useRef(null)
   const sealRef = useRef(null)
   const headlineRef = useRef(null)
+  const [loadCanvas, setLoadCanvas] = useState(false)
+
+  useEffect(() => {
+    // Only load Three.js on desktop non-reduced-motion devices when idle
+    const isMobile = window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!isMobile && !prefersReducedMotion) {
+      if ('requestIdleCallback' in window) {
+        const id = window.requestIdleCallback(() => setLoadCanvas(true), { timeout: 1500 })
+        return () => window.cancelIdleCallback(id)
+      } else {
+        const timer = setTimeout(() => setLoadCanvas(true), 300)
+        return () => clearTimeout(timer)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -74,10 +90,12 @@ export default function Hero() {
         overflow: 'hidden',
       }}
     >
-      {/* Three.js WebGL Decorative Background */}
-      <Suspense fallback={null}>
-        <HeroThreeCanvas />
-      </Suspense>
+      {/* Three.js WebGL Decorative Background (Desktop Idle Only) */}
+      {loadCanvas && (
+        <Suspense fallback={null}>
+          <HeroThreeCanvas />
+        </Suspense>
+      )}
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
@@ -94,13 +112,22 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Hero Mixed-Type Headline */}
-        <div ref={headlineRef} style={{ marginBottom: '2rem' }}>
+        {/* Hero Mixed-Type Headline (Semantic H1) */}
+        <h1
+          ref={headlineRef}
+          style={{
+            marginBottom: '2rem',
+            margin: 0,
+            padding: 0,
+            fontWeight: 'normal',
+          }}
+        >
           {/* Line 1: thin italic serif */}
-          <div style={{ overflow: 'hidden' }}>
-            <div
+          <span style={{ display: 'block', overflow: 'hidden' }}>
+            <span
               className="split-line-inner font-editorial"
               style={{
+                display: 'block',
                 fontSize: 'clamp(2.5rem, 6.5vw, 5.5rem)',
                 lineHeight: 1.05,
                 color: 'var(--ink)',
@@ -108,14 +135,15 @@ export default function Hero() {
               }}
             >
               A digital studio for
-            </div>
-          </div>
+            </span>
+          </span>
 
           {/* Line 2: huge outlined bold sans */}
-          <div style={{ overflow: 'hidden' }}>
-            <div
+          <span style={{ display: 'block', overflow: 'hidden' }}>
+            <span
               className="split-line-inner font-sans-bold text-stroke"
               style={{
+                display: 'block',
                 fontSize: 'clamp(3.5rem, 11vw, 9.5rem)',
                 lineHeight: 0.9,
                 letterSpacing: '0.02em',
@@ -123,14 +151,15 @@ export default function Hero() {
               }}
             >
               BRANDS
-            </div>
-          </div>
+            </span>
+          </span>
 
           {/* Line 3: huge filled bold sans */}
-          <div style={{ overflow: 'hidden' }}>
-            <div
+          <span style={{ display: 'block', overflow: 'hidden' }}>
+            <span
               className="split-line-inner font-sans-bold"
               style={{
+                display: 'block',
                 fontSize: 'clamp(3.5rem, 11vw, 9.5rem)',
                 lineHeight: 0.9,
                 letterSpacing: '0.02em',
@@ -139,9 +168,9 @@ export default function Hero() {
               }}
             >
               WITH TEXTURE
-            </div>
-          </div>
-        </div>
+            </span>
+          </span>
+        </h1>
 
         {/* Tagline Row + Seal Badge */}
         <div
@@ -199,6 +228,8 @@ export default function Hero() {
             <svg
               ref={sealRef}
               viewBox="0 0 100 100"
+              aria-hidden="true"
+              role="presentation"
               style={{
                 width: '100%',
                 height: '100%',
@@ -219,6 +250,7 @@ export default function Hero() {
 
             {/* Inner Emblem */}
             <div
+              aria-hidden="true"
               style={{
                 position: 'absolute',
                 width: '42px',
@@ -231,7 +263,7 @@ export default function Hero() {
                 justifyContent: 'center',
               }}
             >
-              <Sparkles size={18} color="var(--gold)" />
+              <Sparkles size={18} color="var(--gold)" aria-hidden="true" />
             </div>
           </div>
         </div>
@@ -269,23 +301,25 @@ export default function Hero() {
             <motion.a
               href="#contact"
               className="btn-primary"
+              aria-label="Start a project inquiry"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               data-view
             >
               <span>Start a Project</span>
-              <Sparkles size={16} />
+              <Sparkles size={16} aria-hidden="true" />
             </motion.a>
 
             <motion.a
               href="#work"
               className="btn-secondary"
+              aria-label="Scroll down to see selected work"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
-              <ArrowDown size={16} />
+              <ArrowDown size={16} aria-hidden="true" />
               <span>See all work below</span>
             </motion.a>
           </div>
@@ -310,3 +344,4 @@ export default function Hero() {
     </section>
   )
 }
+
