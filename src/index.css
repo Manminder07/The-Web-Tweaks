@@ -106,12 +106,6 @@ body {
   transform: none;
 }
 
-.js-failsafe-reveal * {
-  opacity: 1 !important;
-  transform: none !important;
-  visibility: visible !important;
-}
-
 /* --------------------------------------------------------------------------
    Typography Utilities
    -------------------------------------------------------------------------- */
